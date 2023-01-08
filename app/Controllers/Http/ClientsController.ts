@@ -3,7 +3,7 @@ import Database from "@ioc:Adonis/Lucid/Database";
 import Client from "App/Models/Client";
 import User from "App/Models/User";
 import CreateClientValidator from "App/Validators/CreateClientValidator";
-import EditClienteValidator from "App/Validators/EditClienteValidator";
+import EditClientValidator from "App/Validators/EditClientValidator";
 
 
 export default class ClientsController {
@@ -31,7 +31,7 @@ export default class ClientsController {
   }
 
   public async update({ request, response, auth }: HttpContextContract) {
-    const payload = await request.validate(EditClienteValidator);
+    const payload = await request.validate(EditClientValidator);
     const userAuth = await auth.use("api").authenticate();
 
     // Criando uma transação
