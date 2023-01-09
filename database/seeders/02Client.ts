@@ -1,4 +1,3 @@
-
 import BaseSeeder from "@ioc:Adonis/Lucid/Seeder";
 import Client from "App/Models/Client";
 import User from "App/Models/User";

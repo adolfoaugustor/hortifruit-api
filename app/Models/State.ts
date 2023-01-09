@@ -8,8 +8,5 @@ export default class State extends BaseModel {
   public name: string;
 
   @column()
-  public state_id: number;
-
-  @column()
-  public active: boolean;
+  public uf: string;
 }
