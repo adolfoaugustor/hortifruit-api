@@ -6,7 +6,7 @@ import CreateClientValidator from "App/Validators/CreateClientValidator";
 import EditClientValidator from "App/Validators/EditClientValidator";
 
 
-export default class ClientsController {
+export default class ClientController {
   public async store({ request, response }: HttpContextContract) {
     const payload = await request.validate(CreateClientValidator);
 
