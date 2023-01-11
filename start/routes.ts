@@ -11,6 +11,13 @@ Route.get("/cidades/:id/estabelecimentos", "CityController.Establishments");
 Route.group(() => {
   Route.get("auth/me", "AuthController.me");
 
+  Route.resource("/enderecos", "AddressController").only([
+    "store",
+    "index",
+    "update",
+    "destroy",
+  ]);
+
   Route.put("/cliente", "ClientController.update");
 }).middleware("auth");
 

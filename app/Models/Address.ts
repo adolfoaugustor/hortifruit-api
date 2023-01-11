@@ -1,4 +1,5 @@
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, hasOne, HasOne } from "@ioc:Adonis/Lucid/Orm";
+import City from "App/Models/City";
 
 export default class Address extends BaseModel {
   @column({ isPrimary: true })
@@ -24,4 +25,10 @@ export default class Address extends BaseModel {
 
   @column()
   public complement: string | null;
+
+  @hasOne(() => City, {
+    localKey: "cityId",
+    foreignKey: "id",
+  })
+  public city: HasOne<typeof City>;
 }
