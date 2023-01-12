@@ -1,7 +1,8 @@
 import { DateTime } from "luxon";
-import { BaseModel, column, hasMany, HasMany } from "@ioc:Adonis/Lucid/Orm";
+import { BaseModel, column, hasMany, HasMany, ManyToMany, manyToMany } from "@ioc:Adonis/Lucid/Orm";
 import Category from "App/Models/Category";
 import Env from '@ioc:Adonis/Core/Env';
+import PaymentMethod from "./PaymentMethod";
 
 export default class Establishment extends BaseModel {
   @column({ isPrimary: true })
@@ -33,5 +34,12 @@ export default class Establishment extends BaseModel {
   })
   public categories: HasMany<typeof Category>;
 
-
+  @manyToMany(() => PaymentMethod, {
+    pivotTable: "payment_methods_establishments",
+    localKey: "id",
+    pivotForeignKey: "establishment_id",
+    relatedKey: "id",
+    pivotRelatedForeignKey: "payment_method_id",
+  })
+  public payment_method: ManyToMany<typeof PaymentMethod>;
 }

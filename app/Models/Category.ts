@@ -34,5 +34,5 @@ export default class Category extends BaseModel {
     foreignKey: "categoria_id",
     localKey: "id",
   })
-  public produtos: HasMany<typeof Product>
+  public products: HasMany<typeof Product>
 }
