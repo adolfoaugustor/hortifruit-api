@@ -16,8 +16,13 @@ Route.group(() => {
   ]);
   Route.post("/cliente/cadastro", "ClientController.store");
 
+  Route.post("/pedidos", "OrdersController.store");
+  Route.get("/pedidos", "OrdersController.index");
+
   Route.get("/estabelecimento/pedidos", "EstablishmentsController.orders");
+
   Route.put("/cliente", "ClientController.update");
+
 }).middleware("auth");
 
 Route.get("/", async () => {
