@@ -6,7 +6,7 @@ export default class OrderProduct extends BaseModel {
   public id: number;
 
   @column({ serializeAs: null })
-  public pedido_id: number;
+  public order_id: number;
 
   @column()
   public product_id: number;

@@ -18,6 +18,7 @@ Route.group(() => {
 
   Route.post("/pedidos", "OrdersController.store");
   Route.get("/pedidos", "OrdersController.index");
+  Route.get("/pedidos/:hash_id", "OrdersController.show");
 
   Route.get("/estabelecimento/pedidos", "EstablishmentsController.orders");
 

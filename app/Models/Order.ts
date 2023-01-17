@@ -2,6 +2,10 @@ import { DateTime } from 'luxon'
 import { BaseModel, column, HasMany, hasMany, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm'
 import Client from 'App/Models/Client';
 import OrderStatus from 'App/Models/OrderStatus';
+import OrderProduct from 'App/Models/OrderProduct';
+import Establishment from 'App/Models/Establishment';
+import OrderAddress from './OrderAddress';
+import PaymentMethod from './PaymentMethod';
 
 export default class Order extends BaseModel {
   @column({ isPrimary: true, serializeAs: null })
@@ -48,4 +52,28 @@ export default class Order extends BaseModel {
     localKey: "id",
   })
   public order_status: HasMany<typeof OrderStatus>;
+
+  @hasOne(() => Establishment, {
+    foreignKey: "id",
+    localKey: "establishment_id",
+  })
+  public establishment: HasOne<typeof Establishment>;
+
+  @hasMany(() => OrderProduct, {
+    foreignKey: "order_id",
+    localKey: "id",
+  })
+  public products: HasMany<typeof OrderProduct>;
+
+  @hasOne(() => OrderAddress, {
+    foreignKey: "id",
+    localKey: "order_address_id",
+  })
+  public address: HasOne<typeof OrderAddress>;
+
+  @hasOne(() => PaymentMethod, {
+    foreignKey: "id",
+    localKey: "payment_method_id",
+  })
+  public payment_method: HasOne<typeof PaymentMethod>;
 }
