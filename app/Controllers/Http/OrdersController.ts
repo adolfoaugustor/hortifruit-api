@@ -55,17 +55,17 @@ export default class OrdersController {
         .where("city_id", address.cityId)
         .first();
 
-      let totalValue = 0;
+      let totalValue = 0.00;
       for await (const product of payload.products) {
         const prod = await Product.findByOrFail("id", product.product_id);
-        totalValue += product.quantity * prod.price;
+        totalValue += product.quantity*prod.price;
       }
 
       totalValue = stateCity
-        ? totalValue + stateCity.delivery_cost
+        ? totalValue+parseFloat(stateCity.delivery_cost)
         : totalValue;
 
-      totalValue = parseFloat(totalValue.toFixed(2));
+      totalValue = parseFloat(totalValue).toFixed(2);
 
       if (payload.money_change != null && payload.money_change < totalValue) {
         trx.rollback();
@@ -110,7 +110,7 @@ export default class OrdersController {
 
     } catch (error) {
       await trx.rollback();
-      return response.badRequest("Something in the request is wrong");
+      return response.badRequest("Something in the request is wrong" + error);
     }
   }
 
@@ -124,7 +124,7 @@ export default class OrdersController {
       .preload("order_status", (statusQuery) => {
         statusQuery.preload("status");
       })
-      .orderBy("order_id", "desc");
+      .orderBy("id", "desc");
 
     return response.ok(orders);
   }

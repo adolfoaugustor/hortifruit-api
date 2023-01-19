@@ -30,7 +30,7 @@ export default class extends BaseSchema {
         .unsigned()
         .notNullable()
         .references("id")
-        .inTable("orders_addresses");
+        .inTable("order_addresses");
       table.decimal("amount", 10, 2).notNullable();
       table.decimal("money_change", 10, 2).nullable();
       table.decimal("delivery_cost", 10, 2).notNullable().defaultTo(0);
